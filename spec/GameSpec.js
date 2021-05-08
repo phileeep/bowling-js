@@ -5,13 +5,8 @@ describe('Game', function() {
     game = new Game;
   });
 
-  it('Should be able to add a score to the scorecard and return it', () =>{
-    game.add(2);
-    game.add(6);
-    expect(game.scoreTotal()).toEqual(8);
-  });
   it('Should start a game on the first round', () => {
-    expect(game.round).toEqual(0);
+    expect(game.round).toEqual(1);
   });
   it('Can push two values into one frame', () => {
     game.add(1);
@@ -23,15 +18,11 @@ describe('Game', function() {
     game.add(2);
     expect(game.frame).toEqual(1);
   });
-  // it('Will not continue adding once the game has ended', () =>{
-  //   game.round = 11
-  //   expect(game.add(2)).toEqual(null);
-  // });
+  it('Will not continue adding once the game has ended', () =>{
+    game.round = 12
+    expect(game.add(2)).toEqual(null);
+  });
   it('Will output strike when the user throws a 10', () =>{
     expect(game.add(10)).toEqual('strike');
-  })
-  it('Will output spare when the user throws a 10 between the first and second throws', () =>{
-    game.add(2)
-    expect(game.add(8)).toEqual('spare');
-  })
+  });
 });
