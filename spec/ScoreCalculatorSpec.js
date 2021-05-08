@@ -4,13 +4,23 @@ describe('ScoreCalculator', function() {
   let game;
 
   beforeEach(function(){
-   score = new ScoreCalculator;
    game = new Game();
+   score = new ScoreCalculator();
   });
 
+  it('Can push two values into one frame', () => {
+    score.add(1);
+    score.add(2);
+    expect(score.frames).toEqual([ 1, 2 ]);
+  });
+  it('Will reset the frame after a round', () => {
+    score.add(1);
+    score.add(2);
+    expect(score.frame).toEqual(1);
+  });
   it('can add the total scores of the game', () => {
-    console.log(game.add(1));
-    game.add(5);
-    expect(score.addScores()).toEqual(6);
+    score.add(1);
+    score.add(5);
+    expect(score.addedScores()).toEqual(6);
   });
 });
