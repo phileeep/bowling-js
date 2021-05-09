@@ -49,4 +49,22 @@ describe('ScoreCalculator', function() {
     score.add(2)
     expect(score.addedScores()).toBe(22);
   });
+  it('Will end the game if in the tenth frame without a strike', () => {
+    score.round = 11
+    score.add(2)
+    score.add(2)
+    expect(score.gameOver()).toBe(true)
+  });
+  it('Will end the game if in the tenth frame without a spare', () => {
+    score.round = 11
+    score.add(2)
+    score.add(2)
+    expect(score.gameOver()).toBe(true)
+  });
+  it('Will give another round if you score a strike or a spare in the tenth frame', () => {
+    score.round = 11
+    score.add(10)
+    score.add(5)
+    expect(score.gameOver()).toBe(false)
+  });
 });

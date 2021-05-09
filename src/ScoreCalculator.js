@@ -62,8 +62,14 @@ class ScoreCalculator{
     this.frame += 1
   }
 
-  gameOver(){
-    if (this.round == 12) {
+  gameOver(){ // refactor into isSpare() for this spaghetti code
+    if (this.round == 11 && this.frames[this.frames.length - 1] == 10) {
+      return false
+    } else if (this.round == 11 && this.frames[this.frames.length - 1] + this.frames[this.frames.length - 2] == 10) {
+      return false
+    } else if (this.round < 12) {
+      return false 
+    } else {
       return true
     }
   }
