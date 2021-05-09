@@ -1,7 +1,6 @@
 class ScoreCalculator{
 
   constructor(){
-    this.game = new Game();
     this.frames = []
     this.frame = 1
     this.round = 1
@@ -17,7 +16,7 @@ class ScoreCalculator{
           this.frames.push(this.STRIKE_SCORE);
           this.frames.push(0);
           this.frame == 1
-          this.game.round += 1
+          this.round += 1
         } else {
           this.frames.push(score);
           this.advFrame();
