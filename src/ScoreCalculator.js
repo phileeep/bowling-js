@@ -4,24 +4,26 @@ class ScoreCalculator{
     this.game = new Game();
     this.frames = []
     this.frame = 1
+    this.round = 1
     this.STRIKE_SCORE = 10
   }
   
   add(score){
     console.log(this.round)
-    if (this.game.gameOver()) {
+    if (this.gameOver()) {
       return null
     } else if (this.frame == 1) {
-        if (score == 10) {
+        if (score == 10) { // strike
           this.frames.push(this.STRIKE_SCORE);
+          this.frames.push(0);
           this.frame == 1
           this.game.round += 1
-          // return('strike')
         } else {
           this.frames.push(score);
           this.advFrame();
         }
     } else if (this.frame == 2) {
+      this.isSpare(score);
       this.frames.push(score);
       this.resetFrame();
     }
@@ -31,8 +33,9 @@ class ScoreCalculator{
     let total = 0
     this.frames.forEach((score, index) => {
       if (this.isStrike(score)) {
-        console.log(score)
         total += 10 + this.strikeBonus(index)
+      } else if (this.isSpare(score, index)) {
+        total += 10
       } else {
         total += score
       }
@@ -47,7 +50,7 @@ class ScoreCalculator{
   }
 
   strikeBonus(index){
-    return this.frames[index + 1] + 10
+    return this.frames[index + 2] + 10
   }
 
   resetFrame() {
@@ -59,13 +62,17 @@ class ScoreCalculator{
     this.frame += 1
   }
 
+  gameOver(){
+    if (this.round == 12) {
+      return true
+    }
+  }
 
-  // isSpare(){
+  isSpare(score, index){
+    if (score + this.frames[index + 1] == 10) {
+      return true
+    }
+  }
 
-  // }
-
-  // if (score + this.frames[this.frames.length - 1] == 10){
-  //   return('spare')
-  // }
 }
 
