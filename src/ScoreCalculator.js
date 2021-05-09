@@ -1,26 +1,26 @@
-class ScoreCalculator{
+class ScoreCalculator {
 
-  constructor(){
+  constructor() {
     this.frames = []
     this.frame = 1
     this.round = 1
     this.STRIKE_SCORE = 10
   }
-  
-  add(score){
+
+  add(score) {
     console.log(this.round)
     if (this.gameOver()) {
       return null
     } else if (this.frame == 1) {
-        if (score == 10) { // strike
-          this.frames.push(this.STRIKE_SCORE);
-          this.frames.push(0);
-          this.frame == 1
-          this.round += 1
-        } else {
-          this.frames.push(score);
-          this.advFrame();
-        }
+      if (score == 10) { // strike
+        this.frames.push(this.STRIKE_SCORE);
+        this.frames.push(null);
+        this.frame == 1
+        this.round += 1
+      } else {
+        this.frames.push(score);
+        this.advFrame();
+      }
     } else if (this.frame == 2) {
       this.isSpare(score);
       this.frames.push(score);
@@ -28,7 +28,7 @@ class ScoreCalculator{
     }
   };
 
-  addedScores(){
+  addedScores() {
     let total = 0
     this.frames.forEach((score, index) => {
       if (this.isStrike(score)) {
@@ -42,13 +42,13 @@ class ScoreCalculator{
     return total
   }
 
-  isStrike(score){
+  isStrike(score) {
     if (score == 10) {
       return true
     }
   }
 
-  strikeBonus(index){
+  strikeBonus(index) {
     return this.frames[index + 2] + 10
   }
 
@@ -61,19 +61,19 @@ class ScoreCalculator{
     this.frame += 1
   }
 
-  gameOver(){ // refactor into isSpare() for this spaghetti code
+  gameOver() { // refactor into isSpare() for this spaghetti code
     if (this.round == 11 && this.frames[this.frames.length - 1] == 10) {
       return false
     } else if (this.round == 11 && this.frames[this.frames.length - 1] + this.frames[this.frames.length - 2] == 10) {
       return false
     } else if (this.round < 12) {
-      return false 
+      return false
     } else {
       return true
     }
   }
 
-  isSpare(score, index){
+  isSpare(score, index) {
     if (score + this.frames[index + 1] == 10) {
       return true
     }
